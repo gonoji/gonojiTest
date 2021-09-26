@@ -73,7 +73,7 @@ class CantStop extends Phaser.Scene {
 		dices = this.physics.add.staticGroup({
         	key: 'dice',
        		repeat: 4,
-        	setXY: { x: 12, y: 0, stepX: 48 }
+        	setXY: { x: Game.width/2, y: Game.width/4, stepX: 48 }
     	});
 
 	}
