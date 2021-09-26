@@ -35,26 +35,6 @@ class Title_Scene extends Phaser.Scene {
 
 }
 
-//Game Scene
-class Game_Scene extends Phaser.Scene {
-
-	constructor() {
-		super({key: 'Game_Scene'});
-	}
-
-	preload() {
-
-	}
-
-	create() {
-
-	}
-
-	update() {
-
-	}
-
-}
 
 //Game Scene
 class CantStop extends Phaser.Scene {
@@ -83,62 +63,65 @@ class CantStop extends Phaser.Scene {
 				const y = Game.height/2 + choiceId*48;
 				choices[choiceId][pairId][0]=this.add.sprite(x0,y,'dice').setOrigin(0,0);
 				choices[choiceId][pairId][1]=this.add.sprite(x1,y,'dice').setOrigin(0,0);
+				console.log('pi');
 			}
 		}
+		
+		const dices =[];
+    	for(let i=0;i<4;i++){
+    		dices[i]=this.add.sprite(Game.width/16+48*i, Game.height/3,'dice').setOrigin(0,0);	
+    	}
+    	
 
 
-
-		const dices = this.add.group({
-        	key: 'dice',
-       		repeat: 3,
-        	setXY: { x: Game.width/16, y: Game.height/3, stepX: 48 },
-        	//setXY: { x: Game.width/2, y: Game.height/4, stepX: 48 }
-    	})
-		
-		//text.setText('dododoodoa')
-		//text.setText('dododoodoa')
-		
-		
-    	dices.getChildren().forEach(dice=>dice.setOrigin(0,0))
-    	this.anims.create({
-        	key: 'rolling',
-        	frames: this.anims.generateFrameNumbers('dice', { start: 0, end: 5 }),
-        	frameRate: 10,
-        	repeat: -1
-    	});
-    	this.anims.create({
+    	for(let i=0;i<4;i++){
+    		const a=[0,1,2,3,4,5];
+    		const b=[];
+    		while(a.length){
+    			b.push(a.splice(Phaser.Math.Between(0,a.length-1),1)[0]);
+    		}
+    		console.log(b)
+    		this.anims.create({
+        		key: `rolling${i}`,
+        		frames: this.anims.generateFrameNumbers('dice',{ frames: b }),
+        		frameRate: 16,
+        		repeat: -1
+    		});
+    	}
+		this.anims.create({
     		key: 'face1',
-        	frames: [{key: 'duce', frame: 0}],
+        	frames: [{key: 'dice', frame: 0}],
         	frameRate: 10
     	});
     	this.anims.create({
     		key: 'face2',
-        	frames: [{key: 'duce', frame: 1}],
+        	frames: [{key: 'dice', frame: 1}],
         	frameRate: 10
     	});
     	this.anims.create({
     		key: 'face3',
-        	frames: [{key: 'duce', frame: 2}],
+        	frames: [{key: 'dice', frame: 2}],
     		frameRate: 10
     	});
     	this.anims.create({
     		key: 'face4',
-        	frames: [{key: 'duce', frame: 3}],
+        	frames: [{key: 'dice', frame: 3}],
         	frameRate: 10,
     	});
     	this.anims.create({
     		key: 'face5',
-        	frames: [{key: 'duce', frame: 4}],
+        	frames: [{key: 'dice', frame: 4}],
         	frameRate: 10,
     	});
     	this.anims.create({
     		key: 'face6',
-        	frames: [{key: 'duce', frame: 5}],
+        	frames: [{key: 'dice', frame: 5}],
         	frameRate: 10,
     	});
-    	dices.children.iterate(function (dice) {
-        	dice.anims.play('rolling',true);
-    	});
+
+
+    	dices.forEach((dice, i)=>dice.anims.play(`rolling${i}`,true));
+
 	}
 	
 
