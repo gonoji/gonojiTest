@@ -67,19 +67,17 @@ class CantStop extends Phaser.Scene {
 	}
 
 	create() {
-		//let text = new Text(CantStop, 0, 0, 'Hello World', { font: '"Press Start 2P"' });
-		//this.add.text;
-		//text.active = true;
 		let text = this.add.text(0, 0, 'dededede').setFontSize(30);
 		text.setText('dododoodo')
-		//text = this.add.text(0, 0, 'dededede', { font: '"Press Start 2P"' });
+		
+		dices = this.physics.add.group({
+        	key: 'dice',
+       		repeat: 4,
+        	setXY: { x: 12, y: 0, stepX: 48 }
+    	});
 
 	}
-	showText(text){
-		if(text!=null){
-
-		}
-	}
+	
 
 }
 
