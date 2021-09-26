@@ -68,7 +68,7 @@ class CantStop extends Phaser.Scene {
 
 	create() {
 		let text = this.add.text(0, 0, 'dededede').setFontSize(30);
-		text.setText('dododoodo')
+		text.setText('dododoodoa')
 		
 		dices = this.physics.add.group({
         	key: 'dice',
